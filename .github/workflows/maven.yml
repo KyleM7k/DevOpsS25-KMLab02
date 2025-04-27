@@ -29,10 +29,10 @@ jobs:
         cache: maven
     - name: Verify with Maven
       run: |
-      echo "TESTING CODE"
-      cd 'kmlab02'
-      mvn --batch-mode --update-snapshots clean verify
-      cd ../..
+        echo TESTING PROJECT
+        cd 'kmlab02'
+        mvn --batch-mode --update-snapshots clean verify
+        cd ../..
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     - name: Update dependency graph
