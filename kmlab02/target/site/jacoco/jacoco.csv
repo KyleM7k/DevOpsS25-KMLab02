@@ -1,0 +1,8 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+kmlab02,edu.westga.comp4420.model,ShoppingItem,0,52,1,5,0,17,1,8,0,6
+kmlab02,edu.westga.comp4420.model,ShoppingList,0,55,0,8,0,14,0,9,0,5
+kmlab02,edu.westga.comp4420.viewmodel,MainWindowViewModel,90,0,0,0,26,0,9,0,9,0
+kmlab02,edu.westga.comp4420,App,27,0,0,0,9,0,3,0,3,0
+kmlab02,edu.westga.comp4420.view,AlertProperty,87,0,0,0,33,0,14,0,14,0
+kmlab02,edu.westga.comp4420.view,MainWindow.new ChangeListener() {...},33,0,6,0,8,0,5,0,2,0
+kmlab02,edu.westga.comp4420.view,MainWindow,180,0,10,0,46,0,14,0,9,0

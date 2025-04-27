@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ShoppingItem.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">kmlab02</a> &gt; <a href="index.source.html" class="el_package">edu.westga.comp4420.model</a> &gt; <span class="el_source">ShoppingItem.java</span></div><h1>ShoppingItem.java</h1><pre class="source lang-java linenums">package edu.westga.comp4420.model;
+
+/**
+* Model class ShoppingItem, used to create an item to add to a shopping list
+*
+* @author KYLE_M
+* @version Spring 2025
+*/
+public class ShoppingItem {
+	
+<span class="fc" id="L11">	private String itemName = &quot;&quot;;</span>
+	
+<span class="fc" id="L13">	private int itemQuant = 0;</span>
+	
+	/**
+	 * Default constructor
+	 * 
+	 * @precondition name != null &amp;&amp; quant &gt;= 0
+	 * @postcondition getItemName() == itemName &amp;&amp; getItemQuant() == itemQuant
+	 * 
+	 * @param name - the name of the item to add to the list
+	 * @param quant - the quantity of the item to add to the list
+	 */
+<span class="fc" id="L24">	public ShoppingItem(String name, int quant) {</span>
+<span class="pc bpc" id="L25" title="1 of 6 branches missed.">		if (name == null || name.isEmpty() || quant &lt; 0) {</span>
+<span class="fc" id="L26">			throw new IllegalArgumentException(&quot;All parameters must be properly filled out!&quot;);</span>
+		}
+<span class="fc" id="L28">		this.itemName = name;</span>
+<span class="fc" id="L29">		this.itemQuant = quant;</span>
+<span class="fc" id="L30">	}</span>
+
+	/**
+	 * Gets the item's name
+	 */
+	public String getItemName() {
+<span class="fc" id="L36">		return itemName;</span>
+	}
+
+	/**
+	 * Sets the item's name
+	 * 
+	 * @param itemName - the name of the item
+	 */
+	public void setItemName(String itemName) {
+<span class="fc" id="L45">		this.itemName = itemName;</span>
+<span class="fc" id="L46">	}</span>
+
+	/**
+	 * Returns the amount of a particular item on a list
+	 */
+	public String getItemQuant() {
+<span class="fc" id="L52">		int temp = this.itemQuant;</span>
+<span class="fc" id="L53">		String result = String.valueOf(temp);</span>
+<span class="fc" id="L54">		return result;</span>
+	}
+
+	/**
+	 * Sets the item's quantity
+	 * 
+	 * @param quant - the amount of a particular item on a list
+	 */
+	public void setItemQuant(int quant) {
+<span class="fc" id="L63">		this.itemQuant = quant;</span>
+<span class="fc" id="L64">	}</span>
+	
+	@Override
+	public String toString() {
+<span class="fc" id="L68">		return (this.itemName + &quot;, QTY: &quot; + this.itemQuant);</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

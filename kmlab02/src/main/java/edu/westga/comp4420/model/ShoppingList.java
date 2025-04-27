@@ -50,11 +50,33 @@ public class ShoppingList {
 	public boolean isDuplicate(ShoppingItem item) {
 		if (this.list.size() > 0) {
 			for (ShoppingItem temp : this.list) {
-				if (item.getItemName() == temp.getItemName() && item.getItemQuant() == temp.getItemQuant()) {
+				if (item.getItemName() == temp.getItemName()) {
 					return true;
 				}
 			}
 		}
 		return false;
+	}
+	
+	/**
+	 * Gets the active shopping list
+	 * 
+	 * @return the shopping list
+	 */
+	public ArrayList<ShoppingItem> getList() {
+		return this.list;
+	}
+	
+	/**
+	 * Removes the item from the shopping list
+	 * 
+	 * @precondition item != null
+	 * @postconidtion the item is removed from the list
+	 * 
+	 * @param item - the item to remove
+	 * @return true if removed, false otherwise
+	 */
+	public boolean remove(ShoppingItem item) {
+		return this.list.remove(item);
 	}
 }

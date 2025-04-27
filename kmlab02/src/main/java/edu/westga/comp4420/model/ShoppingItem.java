@@ -22,7 +22,7 @@ public class ShoppingItem {
 	 * @param quant - the quantity of the item to add to the list
 	 */
 	public ShoppingItem(String name, int quant) {
-		if (name == null || quant < 0) {
+		if (name == null || name.isEmpty() || quant < 0) {
 			throw new IllegalArgumentException("All parameters must be properly filled out!");
 		}
 		this.itemName = name;
@@ -48,8 +48,10 @@ public class ShoppingItem {
 	/**
 	 * Returns the amount of a particular item on a list
 	 */
-	public int getItemQuant() {
-		return itemQuant;
+	public String getItemQuant() {
+		int temp = this.itemQuant;
+		String result = String.valueOf(temp);
+		return result;
 	}
 
 	/**

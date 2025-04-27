@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MainWindow.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">kmlab02</a> &gt; <a href="index.source.html" class="el_package">edu.westga.comp4420.view</a> &gt; <span class="el_source">MainWindow.java</span></div><h1>MainWindow.java</h1><pre class="source lang-java linenums">package edu.westga.comp4420.view;
+
+import java.util.Optional;
+
+import edu.westga.comp4420.model.*;
+import edu.westga.comp4420.viewmodel.MainWindowViewModel;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Window;
+
+public class MainWindow {
+
+    @FXML
+    private AnchorPane MainWindow;
+
+    @FXML
+    private Label itemNameLbl;
+
+    @FXML
+    private TextField itemNameTxtBox;
+
+    @FXML
+    private Label itemQuantLbl;
+
+    @FXML
+    private TextField itemQuantTxtBox;
+
+    @FXML
+    private ListView&lt;ShoppingItem&gt; shoppingListView;
+
+    @FXML
+    private Button submitBtn;
+
+    @FXML
+    private Button updateBtn;
+
+    @FXML
+    private Label welcomeLbl;
+    
+    private MainWindowViewModel viewmodel;
+    
+    private ObjectProperty&lt;ShoppingItem&gt; selectedItemProperty;
+    
+    private final AlertProperty alertProperty;
+    
+    /**
+     * Default constructor
+     * 
+     * @precondition none
+     * @postcondition none
+     */
+<span class="nc" id="L64">    public MainWindow() {</span>
+<span class="nc" id="L65">    	this.alertProperty = new AlertProperty();</span>
+<span class="nc" id="L66">    	this.viewmodel = new MainWindowViewModel();</span>
+<span class="nc" id="L67">    	this.selectedItemProperty = new SimpleObjectProperty&lt;ShoppingItem&gt;();</span>
+<span class="nc" id="L68">    }</span>
+    
+    
+    @FXML
+    void initialize() {
+<span class="nc" id="L73">    	this.bindToViewModel();</span>
+<span class="nc" id="L74">    	this.setupListeners();</span>
+<span class="nc" id="L75">    	this.setupListenerForAlerts();</span>
+<span class="nc" id="L76">    	this.itemQuantTxtBox.textProperty().set(&quot;0&quot;);</span>
+<span class="nc" id="L77">    }</span>
+    
+    @FXML
+    void addButtonClick(ActionEvent event) {
+    	try {
+<span class="nc bnc" id="L82" title="All 2 branches missed.">			if (!this.viewmodel.add()) {</span>
+<span class="nc" id="L83">				this.alertProperty.set(AlertProperty.ERROR, &quot;Item Add Error&quot;, &quot;You must provide an item to add!&quot;);</span>
+			}
+<span class="nc" id="L85">		} catch (IllegalArgumentException | NullPointerException ex) {</span>
+<span class="nc" id="L86">			this.alertProperty.set(AlertProperty.ERROR, &quot;Item Add Error&quot;,</span>
+<span class="nc" id="L87">					&quot;ERROR: Couldn't add the item because: &quot; + ex.getMessage());</span>
+<span class="nc" id="L88">		}</span>
+<span class="nc" id="L89">    }</span>
+
+    @FXML
+    void removeButtonClick(ActionEvent event) {
+<span class="nc" id="L93">    	this.viewmodel.remove(this.selectedItemProperty.get());</span>
+<span class="nc" id="L94">    }</span>
+    
+    private void bindToViewModel() {
+<span class="nc" id="L97">    	this.itemNameTxtBox.textProperty().bindBidirectional(this.viewmodel.getItemNameProperty());</span>
+<span class="nc" id="L98">    	this.itemQuantTxtBox.textProperty().bindBidirectional(this.viewmodel.getItemQuantProperty());</span>
+<span class="nc" id="L99">    	this.shoppingListView.itemsProperty().bind(this.viewmodel.getShoppingListProperty());</span>
+<span class="nc" id="L100">    	this.viewmodel.getSelectedItemProperty().bindBidirectional(this.selectedItemProperty);</span>
+<span class="nc" id="L101">    }</span>
+    
+    private void setupListeners() {
+<span class="nc" id="L104">    	this.shoppingListView.getSelectionModel().selectedItemProperty().addListener((observable, oldval, newval) -&gt; {</span>
+<span class="nc bnc" id="L105" title="All 2 branches missed.">    		if (newval != null) {</span>
+<span class="nc" id="L106">    			this.itemNameTxtBox.textProperty().set(newval.getItemName());</span>
+<span class="nc" id="L107">    			this.itemQuantTxtBox.textProperty().set(newval.getItemQuant());</span>
+<span class="nc" id="L108">    			this.selectedItemProperty.set(newval);</span>
+    		}
+<span class="nc" id="L110">    	});</span>
+<span class="nc" id="L111">    }</span>
+    
+    private void setupListenerForAlerts() {
+<span class="nc" id="L114">		this.alertProperty.addListener(new ChangeListener&lt;Number&gt;() {</span>
+			@Override
+			public void changed(ObservableValue&lt;? extends Number&gt; observable, Number oldValue, Number newValue) {
+<span class="nc bnc" id="L117" title="All 2 branches missed.">				if (newValue.intValue() == AlertProperty.ERROR) {</span>
+<span class="nc" id="L118">					MainWindow.this.showAlert(AlertType.ERROR);</span>
+<span class="nc bnc" id="L119" title="All 2 branches missed.">				} else if (newValue.intValue() == AlertProperty.INFORMATION) {</span>
+<span class="nc" id="L120">					MainWindow.this.showAlert(AlertType.INFORMATION);</span>
+<span class="nc bnc" id="L121" title="All 2 branches missed.">				} else if (newValue.intValue() == AlertProperty.CONFIRMATION) {</span>
+<span class="nc" id="L122">					MainWindow.this.showAlert(AlertType.CONFIRMATION);</span>
+				}
+<span class="nc" id="L124">			}</span>
+		});
+<span class="nc" id="L126">	}</span>
+    
+    private void showAlert(Alert.AlertType alertType) {
+<span class="nc" id="L129">		Alert alert = new Alert(alertType);</span>
+<span class="nc" id="L130">		Window owner = this.MainWindow.getScene().getWindow();</span>
+<span class="nc" id="L131">		alert.initOwner(owner);</span>
+<span class="nc bnc" id="L132" title="All 2 branches missed.">		if (!this.alertProperty.getTitle().isEmpty()) {</span>
+<span class="nc" id="L133">			alert.setTitle(this.alertProperty.getTitle());</span>
+		}
+<span class="nc" id="L135">		alert.setHeaderText(this.alertProperty.getHeader());</span>
+<span class="nc" id="L136">		alert.setContentText(this.alertProperty.getContent());</span>
+<span class="nc" id="L137">		Optional&lt;ButtonType&gt; alertResult = alert.showAndWait();</span>
+<span class="nc bnc" id="L138" title="All 4 branches missed.">		if (alertType == AlertType.CONFIRMATION &amp;&amp; alertResult.get() == ButtonType.CANCEL) {</span>
+<span class="nc" id="L139">			this.alertProperty.setResult(&quot;cancel&quot;);</span>
+		} else {
+<span class="nc" id="L141">			this.alertProperty.setResult(&quot;ok&quot;);</span>
+		}
+<span class="nc" id="L143">		this.alertProperty.setType(AlertProperty.NO_ALERT);</span>
+<span class="nc" id="L144">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
