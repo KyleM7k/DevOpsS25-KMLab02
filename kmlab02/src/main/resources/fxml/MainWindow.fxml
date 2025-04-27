@@ -28,6 +28,7 @@
          </font>
       </Label>
       <Button fx:id="submitBtn" layoutX="328.0" layoutY="281.0" mnemonicParsing="false" onAction="#addButtonClick" prefHeight="40.0" prefWidth="101.0" text="Submit" />
-      <Button fx:id="updateBtn" layoutX="446.0" layoutY="281.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="101.0" text="Update" />
+      <Button fx:id="updateBtn" layoutX="446.0" layoutY="281.0" mnemonicParsing="false" onAction="#updateButtonClick" prefHeight="40.0" prefWidth="101.0" text="Update" />
+      <Button fx:id="removeBtn" layoutX="387.0" layoutY="337.0" mnemonicParsing="false" onAction="#removeButtonClick" prefHeight="40.0" prefWidth="101.0" text="Remove" />
    </children>
 </AnchorPane>

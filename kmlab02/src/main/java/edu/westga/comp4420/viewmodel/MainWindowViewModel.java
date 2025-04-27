@@ -91,14 +91,13 @@ public class MainWindowViewModel {
 		try {
 			String itemName = this.itemNameProperty.getValue();
 			String itemQuant = this.itemQuantProperty.getValue();
-			ShoppingItem item = new ShoppingItem(itemName, Integer.parseInt(itemQuant));
+			ShoppingItem item = new ShoppingItem(itemName, this.isNumber(itemQuant));
 			boolean result = this.list.add(item);
 			this.updateShoppingList();
 			return result;
 		} catch (Exception ex) {
-			ex.getMessage();
+			throw new IllegalArgumentException(ex.getMessage());
 		}
-		return false;
 	}
 	
 	/**
@@ -112,9 +111,34 @@ public class MainWindowViewModel {
 		this.updateShoppingList();
 		return result;
 	}
+	
+	/**
+	 * Edits the selected item and then updates the list
+	 */
+	public void edit(ShoppingItem item) {
+		if (item == null) {
+			throw new NullPointerException("You must select an item before you can edit it!");
+		}
+		String itemName = this.itemNameProperty.getValue();
+		String itemQuant = this.itemQuantProperty.getValue();
+		item.setItemName(itemName);
+		item.setItemQuant(Integer.parseInt(itemQuant));
+		this.updateShoppingList();
+	}
 
 	private void updateShoppingList() {
 		this.shoppingListProperty.set(FXCollections.observableArrayList(this.list.getList()));
 	}
 	
+	private int isNumber(String quant) {
+		try {
+			int result = Integer.parseInt(quant);
+			if (result < 0) {
+				throw new IllegalArgumentException("Quantity cannot be a negative number!");
+			}
+			return result;
+		} catch (NumberFormatException ex) {
+			throw new IllegalArgumentException("Quantity value must be a valid number!");
+		}
+	}
 }

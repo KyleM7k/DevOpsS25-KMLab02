@@ -45,6 +45,9 @@ public class MainWindow {
 
     @FXML
     private Button updateBtn;
+    
+    @FXML
+    private Button removeBtn;
 
     @FXML
     private Label welcomeLbl;
@@ -79,18 +82,31 @@ public class MainWindow {
     @FXML
     void addButtonClick(ActionEvent event) {
     	try {
-			if (!this.viewmodel.add()) {
-				this.alertProperty.set(AlertProperty.ERROR, "Item Add Error", "You must provide an item to add!");
-			}
-		} catch (IllegalArgumentException | NullPointerException ex) {
+    		this.viewmodel.add();
+    		this.itemNameTxtBox.textProperty().set("");
+    		this.itemQuantTxtBox.textProperty().set("0");
+		} catch (Exception ex) {
 			this.alertProperty.set(AlertProperty.ERROR, "Item Add Error",
-					"ERROR: Couldn't add the item because: " + ex.getMessage());
+					"Can't add the item: " + ex.getMessage());
 		}
     }
 
     @FXML
     void removeButtonClick(ActionEvent event) {
     	this.viewmodel.remove(this.selectedItemProperty.get());
+    	this.itemNameTxtBox.textProperty().set("");
+		this.itemQuantTxtBox.textProperty().set("0");
+    }
+    
+    @FXML
+    void updateButtonClick(ActionEvent event) {
+    	try {
+    		this.viewmodel.edit(this.selectedItemProperty.get());
+    		this.itemNameTxtBox.textProperty().set("");
+    		this.itemQuantTxtBox.textProperty().set("0");
+		} catch (Exception ex) {
+			this.alertProperty.set(AlertProperty.ERROR, "Item Edit Error", "Can't edit the item: " + ex.getMessage());
+		}
     }
     
     private void bindToViewModel() {
