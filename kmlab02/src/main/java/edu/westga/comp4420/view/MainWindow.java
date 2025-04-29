@@ -93,9 +93,14 @@ public class MainWindow {
 
     @FXML
     void removeButtonClick(ActionEvent event) {
-    	this.viewmodel.remove(this.selectedItemProperty.get());
-    	this.itemNameTxtBox.textProperty().set("");
-		this.itemQuantTxtBox.textProperty().set("0");
+		try {
+			this.viewmodel.remove(this.selectedItemProperty.get());
+	    	this.itemNameTxtBox.textProperty().set("");
+			this.itemQuantTxtBox.textProperty().set("0");
+		} catch (Exception ex) {
+			this.alertProperty.set(AlertProperty.ERROR, "Item Remove Error",
+					"Can't remove the item: " + ex.getMessage());
+		}
     }
     
     @FXML
