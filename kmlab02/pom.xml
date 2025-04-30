@@ -136,6 +136,7 @@
 									<element>PACKAGE</element>
 									<includes>
 										<include>edu.westga.comp4420.model</include>
+										<include>edu.westga.comp4420.view</include>
 									</includes>
 									<limits>
 										<limit>
