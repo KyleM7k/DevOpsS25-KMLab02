@@ -137,10 +137,6 @@ public class MainWindow {
 			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
 				if (newValue.intValue() == AlertProperty.ERROR) {
 					MainWindow.this.showAlert(AlertType.ERROR);
-				} else if (newValue.intValue() == AlertProperty.INFORMATION) {
-					MainWindow.this.showAlert(AlertType.INFORMATION);
-				} else if (newValue.intValue() == AlertProperty.CONFIRMATION) {
-					MainWindow.this.showAlert(AlertType.CONFIRMATION);
 				}
 			}
 		});
@@ -156,11 +152,7 @@ public class MainWindow {
 		alert.setHeaderText(this.alertProperty.getHeader());
 		alert.setContentText(this.alertProperty.getContent());
 		Optional<ButtonType> alertResult = alert.showAndWait();
-		if (alertType == AlertType.CONFIRMATION && alertResult.get() == ButtonType.CANCEL) {
-			this.alertProperty.setResult("cancel");
-		} else {
-			this.alertProperty.setResult("ok");
-		}
+		this.alertProperty.setResult("ok");
 		this.alertProperty.setType(AlertProperty.NO_ALERT);
 	}
 }

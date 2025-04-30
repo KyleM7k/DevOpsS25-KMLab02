@@ -125,7 +125,7 @@ public class MainWindowViewModel {
 		String itemName = this.itemNameProperty.getValue();
 		String itemQuant = this.itemQuantProperty.getValue();
 		item.setItemName(itemName);
-		item.setItemQuant(Integer.parseInt(itemQuant));
+		item.setItemQuant(this.isNumber(itemQuant));
 		this.updateShoppingList();
 	}
 

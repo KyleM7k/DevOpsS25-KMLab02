@@ -50,18 +50,6 @@ public class AlertProperty {
 	}
 
 	/**
-	 * Sets the header.
-	 * 
-	 * @precondition none
-	 * @postcondition getHeader() == header
-	 *
-	 * @param header the new header
-	 */
-	public void setHeader(String header) {
-		this.header = header;
-	}
-
-	/**
 	 * Gets the header.
 	 * 
 	 * @precondition none
@@ -108,19 +96,7 @@ public class AlertProperty {
 	public void setContent(String content) {
 		this.content = content;
 	}
-
-	/**
-	 * Gets the type.
-	 *
-	 * @precondition none
-	 * @postcondition none
-	 * 
-	 * @return the type
-	 */
-	public Integer getType() {
-		return this.typeProperty.get();
-	}
-
+	
 	/**
 	 * Sets the result.
 	 *
@@ -134,18 +110,6 @@ public class AlertProperty {
 	}
 
 	/**
-	 * Gets the result.
-	 * 
-	 * @precondition none
-	 * @postcondition none
-	 *
-	 * @return the result
-	 */
-	public String getResult() {
-		return this.result;
-	}
-
-	/**
 	 * Sets the type.
 	 * 
 	 * @precondition none
@@ -155,28 +119,6 @@ public class AlertProperty {
 	 */
 	public void setType(int type) {
 		this.typeProperty.set(type);
-	}
-
-	/**
-	 * Sets all data fields of this AlertProperty object.
-	 * 
-	 * The type property needs to be set at last so that all other fields are set
-	 * when the ChangeListener for the type field is activated
-	 *
-	 * @precondition none
-	 * @postcondition getTitle() == title && getHeader() == header && getContent()
-	 *                == content && getType() == type
-	 *
-	 * @param type    the type
-	 * @param header  the type
-	 * @param title   the title
-	 * @param content the content
-	 */
-	public void set(int type, String title, String header, String content) {
-		this.setTitle(title);
-		this.setHeader(header);
-		this.setContent(content);
-		this.setType(type);
 	}
 
 	/**
