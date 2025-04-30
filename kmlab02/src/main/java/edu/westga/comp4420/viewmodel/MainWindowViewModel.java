@@ -107,6 +107,9 @@ public class MainWindowViewModel {
 	 * @return true if removed, false if otherwise
 	 */
 	public boolean remove(ShoppingItem item) {
+		if (item == null) {
+			throw new NullPointerException("You must select an item before you can remove it!");
+		}
 		boolean result = this.list.remove(item);
 		this.updateShoppingList();
 		return result;
